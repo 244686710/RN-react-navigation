@@ -1,7 +1,13 @@
 import React from 'react';
 import { Button, Text, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { createAppContainer, createBottomTabNavigator } from 'react-navigation';
+import { 
+  createAppContainer, 
+  createBottomTabNavigator,
+  createStackNavigator 
+} from 'react-navigation';
+
+import DetailsScreen from './src/pages/DetailsScreen'
 
 class HomeScreen extends React.Component {
     render() {
@@ -23,8 +29,8 @@ class SettingsScreen extends React.Component {
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <Text>Settings!</Text>
           <Button 
-            title="Go to Home"
-            onPress={() => this.props.navigation.navigate('Home')}
+            title="Go to Details"
+            onPress={() => this.props.navigation.navigate('Details')}
           />
         </View>
       );
@@ -65,9 +71,15 @@ class IconWithBadge extends React.Component {
     );
   }
 }
+
+const SettingsStack = createStackNavigator({
+  Settings: SettingsScreen,
+  Details: DetailsScreen,
+});
+
 const TabNavigator = createBottomTabNavigator({
     Home: HomeScreen,
-    Settings: SettingsScreen
+    Settings: SettingsStack
 }, {
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({focused, horizontal, tintColor}) => {
