@@ -3,12 +3,13 @@ import {
     View,
     Text,
     Button,
+    AsyncStorage
 } from 'react-native';
 
 
 export default class HomeScreen extends React.Component {
     static navigationOptions = {
-        title: 'Home', // 设置导航条标题
+        title: 'Welcome to the app!', // 设置导航条标题
         headerBackTitle:null,
     };
     render() {
@@ -22,8 +23,25 @@ export default class HomeScreen extends React.Component {
                     onPress={() => navigate.navigate('Details', {name: '传值'})}  //跳转到另一个界面
                     // onPress={() => this.props.navigation.navigate('Details', {name: '卓原'})} //如果上边没有自定义去接受.则要这样写跳转到另一个界面
                 />
+                <Button 
+                    title="Show me more of the app"
+                    onPress={this._showMoreApp}
+                />
+                <Button 
+                    title="Actually, sign me out :)"
+                    onPress={this._signOutAsync}
+                />
 
             </View>
         );
     }
+
+    _showMoreApp = () => {
+        this.props.navigation.navigate('Other');
+    };
+    
+    _signOutAsync = async () => {
+        await AsyncStorage.clear();
+        this.props.navigation.navigate('Auth');
+    };
 }

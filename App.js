@@ -9,10 +9,13 @@
 import React, {Component} from 'react';
 import { createSwitchNavigator, createAppContainer, createStackNavigator } from 'react-navigation'
 import HomeScreen from './src/pages/HomeScreen'
+import SignInScreen from './src/pages/SignInScreen'
 import DetailsScreen from './src/pages/DetailsScreen'
+import AuthLoadingScreen from './src/pages/AuthLoadingScreen'
+
 import { View, Text, Button} from 'react-native';
 
-const AppNavigator  = createStackNavigator({
+const AppStack  = createStackNavigator({
   Home: {
     screen: HomeScreen
   },
@@ -22,28 +25,17 @@ const AppNavigator  = createStackNavigator({
 }, {
   initialRouteName: 'Home'
 })
+
 const AuthStack = createStackNavigator({ SignIn: SignInScreen });
 
-class SignInScreen extends React.Component {
-  render () {
-    return (
-      <View>
-        <Text>SignInScreen Page</Text>
-        <Button 
-          title="Login"
-          onPress={()=> {
-            alert('登陆ing')
-          }}
-        />
-      </View>
-    )
-  }
-}
-
 const AppContainer = createAppContainer(createSwitchNavigator({
-    App: AppNavigator,
-    Auth: AuthStack
-  }
+
+  AuthLoading: AuthLoadingScreen,
+  App: AppStack,
+  Auth: AuthStack
+}, {
+  initialRouteName: 'Auth'
+}
 ));
 
 export default AppContainer;
