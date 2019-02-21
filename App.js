@@ -7,9 +7,10 @@
  */
 
 import React, {Component} from 'react';
-import { createAppContainer, createStackNavigator } from 'react-navigation'
+import { createSwitchNavigator, createAppContainer, createStackNavigator } from 'react-navigation'
 import HomeScreen from './src/pages/HomeScreen'
 import DetailsScreen from './src/pages/DetailsScreen'
+import { View, Text, Button} from 'react-native';
 
 const AppNavigator  = createStackNavigator({
   Home: {
@@ -21,7 +22,28 @@ const AppNavigator  = createStackNavigator({
 }, {
   initialRouteName: 'Home'
 })
+const AuthStack = createStackNavigator({ SignIn: SignInScreen });
 
-const AppContainer = createAppContainer(AppNavigator);
+class SignInScreen extends React.Component {
+  render () {
+    return (
+      <View>
+        <Text>SignInScreen Page</Text>
+        <Button 
+          title="Login"
+          onPress={()=> {
+            alert('登陆ing')
+          }}
+        />
+      </View>
+    )
+  }
+}
+
+const AppContainer = createAppContainer(createSwitchNavigator({
+    App: AppNavigator,
+    Auth: AuthStack
+  }
+));
 
 export default AppContainer;
