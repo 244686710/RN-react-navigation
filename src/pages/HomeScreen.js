@@ -23,8 +23,8 @@ class HomeScreen extends React.Component {
                 <Text>Welcome {user.name}</Text>
                 <Text>Age: {user.age}</Text>
                 <Button
-                    title="Go to Detail"
-                    onPress={() => navigate.navigate('Details', {name: '传值'})}  //跳转到另一个界面
+                    title="查看flex布局"
+                    onPress={() => navigate.navigate('Details', {name: 'flex布局'})}  //跳转到另一个界面
                     // onPress={() => this.props.navigation.navigate('Details', {name: '卓原'})} //如果上边没有自定义去接受.则要这样写跳转到另一个界面
                 />
                 <Button 
